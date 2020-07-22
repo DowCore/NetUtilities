@@ -60,7 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Npoi\Input\CreateSheetInput.cs" />
-    <Compile Include="Npoi\Input\HeadCellInput.cs" />
+    <Compile Include="Npoi\Input\ExcelCellTypeEnum.cs" />
+    <Compile Include="Npoi\Input\ExcelCloumnDataFormat.cs" />
+    <Compile Include="Npoi\Input\CreateHeadCellInput.cs" />
+    <Compile Include="Npoi\Input\IHeadCell.cs" />
+    <Compile Include="Npoi\Input\ValidationErrorMessage.cs" />
     <Compile Include="Singleton\ISingleton.cs" />
     <Compile Include="Npoi\Input\ExcelTypeEnum.cs" />
     <Compile Include="Npoi\WorkbookFactory.cs" />

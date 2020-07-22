@@ -6,7 +6,7 @@
         {
             SheetName = "sheet1";
         }
-        public CreateSheetInput(string sheetName)
+        public CreateSheetInput(string sheetName):this()
         {
             SheetName = sheetName;
         }
