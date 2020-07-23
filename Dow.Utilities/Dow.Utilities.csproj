@@ -59,9 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colors\DesignColor.cs" />
     <Compile Include="Exceptions\UserDefinedException.cs" />
     <Compile Include="Exceptions\ErrorMessageCode.cs" />
     <Compile Include="Files\PathOperator.cs" />
+    <Compile Include="Npoi\FormatHelper.cs" />
     <Compile Include="Npoi\Input\CellFormatEnum.cs" />
     <Compile Include="Npoi\Input\CreateSheetInput.cs" />
     <Compile Include="Npoi\Input\ExcelCellTypeEnum.cs" />

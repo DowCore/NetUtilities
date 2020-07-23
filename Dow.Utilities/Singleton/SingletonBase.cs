@@ -1,15 +1,23 @@
-﻿using System;
-
+﻿
 namespace Dow.Utilities.Singleton
 {
-    public sealed class SingletonBase<T> where T : class,ISingleton, new()
+    public class SingletonBase
     {
-        private volatile static SingletonBase<T> instance = null;
-        private static readonly object locker = new object();
+        protected SingletonBase()
+        {
 
-        private  static T singleton =null;
+        }
+        protected static readonly object locker = new object();
+    }
+    public sealed class SingletonBase<T>:SingletonBase where T : class,ISingleton, new() 
+    {
+       
         private SingletonBase() { }
 
+        private volatile static SingletonBase<T> instance = null;
+        
+
+        private T singleton = null;
         public static SingletonBase<T> Instance
 
         {
@@ -47,9 +55,9 @@ namespace Dow.Utilities.Singleton
                     {
 
                         if (singleton == null)
-
+                        {
                             singleton = new T();
-
+                        }
                     }
 
                 }
