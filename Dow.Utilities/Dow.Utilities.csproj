@@ -73,11 +73,13 @@
     <Compile Include="Npoi\Input\IHeadCell.cs" />
     <Compile Include="Npoi\Input\ValidationErrorMessage.cs" />
     <Compile Include="Npoi\WorkbookManufacturer.cs" />
+    <Compile Include="Regulars\RegularCommon.cs" />
     <Compile Include="Singleton\ISingleton.cs" />
     <Compile Include="Npoi\Input\ExcelTypeEnum.cs" />
     <Compile Include="Npoi\WorkbookFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singleton\SingletonBase.cs" />
+    <Compile Include="StringExtend\StringExtend.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
