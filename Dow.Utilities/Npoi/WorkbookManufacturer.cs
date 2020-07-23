@@ -1,13 +1,14 @@
 ﻿using Dow.Utilities.Npoi.Input;
 using Dow.Utilities.Singleton;
-using NPOI.OpenXmlFormats.Dml;
 using NPOI.SS.UserModel;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Dow.Utilities.Npoi
 {
     public class WorkbookManufacturer: ISingleton
     {
+        public IWorkbookFactory WorkbookFactory { get => SingletonBase<WorkbookFactory>.Instance.Singleton; }
         public void Create(string filePath, CreateSheetInput createSheetInput)
         {
             var suffix = Path.GetExtension(filePath);
@@ -17,6 +18,17 @@ namespace Dow.Utilities.Npoi
             workbook.Write(sw);
         }
 
+        public void Create(string filePath, List<CreateSheetInput> createSheetInputs)
+        {
+            var suffix = Path.GetExtension(filePath);
+            var workbook = WorkbookFactory.Create(GetExcelType(suffix));
+            createSheetInputs.ForEach(item =>
+            {
+                CreteSheet(workbook, item);
+            });
+            FileStream sw = File.Create(filePath);
+            workbook.Write(sw);
+        }
         public ExcelTypeEnum GetExcelType(string suffix)
         {
             switch(suffix.ToLower())
@@ -29,9 +41,7 @@ namespace Dow.Utilities.Npoi
                     return ExcelTypeEnum.XLSX;
             }
         }
-
-        public IWorkbookFactory WorkbookFactory = Singleton.SingletonBase<WorkbookFactory>.Instance.Singleton;
-        private IWorkbook CreteSheet(IWorkbook workbook, CreateSheetInput createSheetInput)
+        private void CreteSheet(IWorkbook workbook, CreateSheetInput createSheetInput)
         {
             var sheet = workbook.CreateSheet(createSheetInput.SheetName);
             var row = sheet.CreateRow(0);
@@ -41,9 +51,6 @@ namespace Dow.Utilities.Npoi
                 cell.SetCellValue(item.CellValue);
                 item.ExecuteFormat(cell);
             });
-            return workbook;
         }
-
-        //private void 
     }
 }

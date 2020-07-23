@@ -1,6 +1,6 @@
 ﻿namespace Dow.Utilities.Npoi.Input
 {
-    public class ExcelCloumnDataFormat
+    public static class ExcelCloumnDataFormat
     {
         /// <summary>
         /// 常规
