@@ -17,7 +17,7 @@ namespace Dow.Utilities.Npoi.Input
             CellType = cellType;
         }
 
-        public CreateHeadCellBase(int column, ExcelCellTypeEnum excelCellTypeEnum):this(column)
+        public CreateHeadCellBase(int column, EnumExcelCellType excelCellTypeEnum):this(column)
         {
             CellType = (CellType)excelCellTypeEnum;
         }
@@ -64,8 +64,8 @@ namespace Dow.Utilities.Npoi.Input
 
         public string ColumnDadaFormat { get; set; } = ExcelCloumnDataFormat.General;
 
-        private CellFormatEnum cellFormat;
-        public CellFormatEnum CellFormat { get => cellFormat; set { cellFormat = value; AddFormatRange(); } }
+        private EnumCellFormat cellFormat;
+        public EnumCellFormat CellFormat { get => cellFormat; set { cellFormat = value; AddFormatRange(); } }
 
         public List<ICellFormat> Actions { get; private set; } = new List<ICellFormat>();
         /*end 变量与属性块*/
@@ -73,17 +73,17 @@ namespace Dow.Utilities.Npoi.Input
         private void AddFormatRange()
         {
           
-            if ((CellFormat & CellFormatEnum.Bold) == CellFormatEnum.Bold)
+            if ((CellFormat & EnumCellFormat.Bold) == EnumCellFormat.Bold)
             {
                 AddFormat(new BoldweightFormat());
             }
 
-            if ((CellFormat & CellFormatEnum.InfoForeColor) == CellFormatEnum.InfoForeColor)
+            if ((CellFormat & EnumCellFormat.InfoColor) == EnumCellFormat.InfoColor)
             {
-                AddFormat(new InfoForeColorFormat());
+                AddFormat(new InfoColorFormat());
             }
 
-            if((CellFormat & CellFormatEnum.InfoBackground) == CellFormatEnum.InfoBackground)
+            if((CellFormat & EnumCellFormat.InfoBackground) == EnumCellFormat.InfoBackground)
             {
                 AddFormat(new InfoBackgroundFormat());
             }

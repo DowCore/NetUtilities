@@ -26,7 +26,7 @@ namespace Dow.Utilities.Npoi.Tests
         public void TestConstruction()
         {
             var input = new CreateSheetInput("123");
-            var head = new CreateHeadCellBase(1, ExcelCellTypeEnum.Boolean);
+            var head = new CreateHeadCellBase(1, EnumExcelCellType.Boolean);
             var t = Singleton.SingletonBase<WorkbookFactory>.Instance.Singleton;
             var first = t.Create(ExcelTypeEnum.XLSX);
             var sheet = first.CreateSheet();

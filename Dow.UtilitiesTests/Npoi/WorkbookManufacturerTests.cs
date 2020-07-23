@@ -19,7 +19,7 @@ namespace Dow.Utilities.Npoi.Tests
             var input = new CreateSheetInput();
             input.AddHeadCell(new CreateHeadCellBase(0)
             {
-                CellFormat = CellFormatEnum.Bold | CellFormatEnum.InfoBackground,
+                CellFormat = EnumCellFormat.Bold | EnumCellFormat.InfoBackground,
                 CellValue = "test1"
             });
             input.AddHeadCell(new CreateHeadCellBase(1)
