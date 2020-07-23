@@ -6,6 +6,6 @@
 
         public const string NumericRegular         = @"^[+-]?\d+[.]?\d*$";
 
-        public const string NumericOrLetterRegular = "[a-zA-Z0-9]";
+        public const string NumericOrLetterRegular = @"^[0-9a-zA-Z]+$";
     }
 }

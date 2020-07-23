@@ -78,6 +78,7 @@
     <Compile Include="Npoi\WorkbookManufacturerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singleton\SingletonTest.cs" />
+    <Compile Include="StringExtend\StringExtendTests.cs" />
     <Compile Include="StringExtend\StringTests.cs" />
   </ItemGroup>
   <ItemGroup>

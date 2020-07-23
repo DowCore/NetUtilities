@@ -1,22 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Dow.Utilities.StringExtend;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dow.Utilities.StringExtend.Tests
 {
     [TestClass()]
     public class StringTests
     {
-        [TestMethod()]
-        public void IsNumberTest()
-        {
-            Assert.IsTrue("0123".IsInteger(), "验证整数失败");
-            Assert.IsTrue(!("0.123".IsInteger()), "验证整数失败");
-        }
         [TestMethod()]
         public void IsNullOrWhiteSpaceTest()
         {
