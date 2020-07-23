@@ -75,6 +75,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Npoi\WorkbookFactoryTests.cs" />
+    <Compile Include="Npoi\WorkbookManufacturerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

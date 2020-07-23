@@ -1,6 +1,6 @@
-﻿using NPOI.HPSF;
-using NPOI.SS.UserModel;
+﻿using NPOI.SS.UserModel;
 using NPOI.SS.Util;
+using System;
 using System.Collections.Generic;
 
 namespace Dow.Utilities.Npoi.Input
@@ -23,8 +23,29 @@ namespace Dow.Utilities.Npoi.Input
             CellType = (CellType)excelCellTypeEnum;
         }
         /*end 构造函数块*/
+        /*start 公共方法 */
+        public void AddFormat(ICellFormat action)
+        {
+            Actions.Add(action);
+        }
 
+        public virtual void ExecuteFormat(ICell cell)
+        {
+            Font = cell.Sheet.Workbook.CreateFont();
+            CellStyle = cell.Sheet.Workbook.CreateCellStyle();
+            Actions.ForEach(t =>
+            {
+                t.Format(cell,this);
+            });
+        }
+
+        /*end 公共方法*/
         /*start 变量与属性块*/
+
+        public IFont Font { get; private set; }
+
+        public ICellStyle CellStyle { get; private set; }
+        public int FontSize { get; set; } = 10;
         /// <summary>
         /// 默认单元格宽度的倍数，即 * 256
         /// </summary>
@@ -44,7 +65,30 @@ namespace Dow.Utilities.Npoi.Input
 
         public string ColumnDadaFormat { get; set; } = ExcelCloumnDataFormat.General;
 
+        private CellFormatEnum cellFormat;
+        public CellFormatEnum CellFormat { get => cellFormat; set { cellFormat = value; AddFormatRange(); } }
+
+        public List<ICellFormat> Actions { get; private set; } = new List<ICellFormat>();
         /*end 变量与属性块*/
+
+        private void AddFormatRange()
+        {
+          
+            if ((CellFormat & CellFormatEnum.Bold) == CellFormatEnum.Bold)
+            {
+                AddFormat(new BoldweightFormat());
+            }
+
+            if ((CellFormat & CellFormatEnum.InfoForeColor) == CellFormatEnum.InfoForeColor)
+            {
+                AddFormat(new InfoForeColorFormat());
+            }
+
+            if((CellFormat & CellFormatEnum.InfoBackground) == CellFormatEnum.InfoBackground)
+            {
+                AddFormat(new InfoBackgroundFormat());
+            }
+        }
     }
 
     public class DropdownColumn : CreateHeadCellBase
@@ -57,16 +101,21 @@ namespace Dow.Utilities.Npoi.Input
         public List<string> DropdownList { get; set; }
 
         public ValidationErrorMessage ErrorMessage { get; set; }
+        public override void ExecuteFormat(ICell cell)
+        {
+            base.ExecuteFormat(cell);
+            SetColumnDropdown(cell);
+        }
 
-        public virtual void SetColumnDropdown(ICell cell)
+        private  void SetColumnDropdown(ICell cell)
         {
             var dataValidationHelp = cell.Sheet.GetDataValidationHelper();
             var addressList = new CellRangeAddressList(1, 65535, ColumnIndex, ColumnIndex);
             var constraint = dataValidationHelp.CreateExplicitListConstraint(DropdownList.ToArray());
             var dataValidation = dataValidationHelp.CreateValidation(constraint, addressList);
-            if(ErrorMessage!=null)
+            if (ErrorMessage != null)
             {
-                dataValidation.CreateErrorBox(ErrorMessage.Title,ErrorMessage.Context);
+                dataValidation.CreateErrorBox(ErrorMessage.Title, ErrorMessage.Context);
                 dataValidation.ShowErrorBox = true;
             }
             cell.Sheet.AddValidationData(dataValidation);

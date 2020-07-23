@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NPOI.SS.UserModel;
 
 namespace Dow.Utilities.Npoi.Input
 {
     public interface IHeadCell
     {
+        IFont Font { get; }
+
+        ICellStyle CellStyle { get; }
     }
 }
