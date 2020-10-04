@@ -36,6 +36,10 @@ namespace Dow.Utilities.Npoi.Input
             {
                 t.Format(cell,this);
             });
+            var style = cell.Sheet.Workbook.CreateCellStyle();
+            var format = cell.Sheet.Workbook.CreateDataFormat();
+            style.DataFormat = format.GetFormat(ColumnDadaFormat);
+            cell.Sheet.SetDefaultColumnStyle(ColumnIndex, style);
         }
 
         /*end 公共方法*/

@@ -24,6 +24,7 @@ namespace Dow.Utilities.Npoi
                 var style = (headCell.CellStyle as XSSFCellStyle);
                 style.SetFillForegroundColor(new XSSFColor(rgb));
                 style.FillPattern = FillPattern.SolidForeground;
+                cell.CellStyle = style;
             }
         }
     }
